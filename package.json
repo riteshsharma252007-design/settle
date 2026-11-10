@@ -1,0 +1,6 @@
+{
+  "name" : "settle",
+  "private": true,
+  "workspaces": ["server"],
+  "scripts": {}
+}

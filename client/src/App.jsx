@@ -10,7 +10,6 @@ export default function App() {
       .then((body) => setStatus(body.data.status))
       .catch(() => setStatus('server not reachable'));
   }, []);
-
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col gap-6 p-4">
       <AppLogo />

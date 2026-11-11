@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import AppLogo from './components/AppLogo.jsx';
 
 export default function App() {
   const [status, setStatus] = useState('checking...');
 
   useEffect(() => {
-
     fetch('/api/health')
-    .then((res) => res.json())
-    .then((body) => setStatus(body.data.status))
-    .catch(() => setStatus('server not reachable'));
+      .then((res) => res.json())
+      .then((body) => setStatus(body.data.status))
+      .catch(() => setStatus('server not reachable'));
   }, []);
 
   return (

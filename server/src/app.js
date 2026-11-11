@@ -4,5 +4,5 @@ export const app = express();
 app.use(express.json());
 
 app.get('/api/health', (req, res) => {
-  res.json({ data: { status: 'ok'} } );
-}); 
+  res.json({ data: { status: 'ok' } });
+});

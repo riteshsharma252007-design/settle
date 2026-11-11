@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Design tokens from the UI/UX Specification, section 2.
    @theme tells Tailwind to turn each variable into classes,
@@ -13,7 +13,7 @@
 
   --color-bg: #f5f6fc;
   --color-surface: #ffffff;
-  --color-field: #ecEEf9;
+  --color-field: #eceef9;
 
   --color-ink: #12161f;
   --color-ink-muted: #5b6478;
@@ -25,7 +25,7 @@
   --color-danger: #dc2626;
   --color-danger-bg: #fee2e2;
 
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 
 body {

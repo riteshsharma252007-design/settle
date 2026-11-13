@@ -88,3 +88,25 @@ settle/
 In development the browser talks only to the client on port 5173. Vite quietly
 forwards any request starting with `/api` to the server on port 4000. The browser
 therefore sees a single origin, which keeps cookies and security simple.
+
+
+## Database (M1)
+
+Requires PostgreSQL 16 or newer with two empty databases: `settle` and `settle_test`.
+
+### Environment files (never committed)
+
+- `.env` in the project root, copied from `.env.example`, with `DATABASE_URL` pointing at `settle`.
+- `.env.test` in the project root, with one line: `DATABASE_URL` pointing at `settle_test`.
+
+### Commands (run from the project root)
+
+| Command | What it does |
+| --- | --- |
+| `npm run migrate -w server` | Applies any new SQL files from `server/src/db/migrations` |
+| `npm run seed -w server` | Fills `settle` with 40 fake people (development only; refuses to run in production) |
+| `npm test -w server` | Migrates `settle_test` and runs the tests |
+
+Fake users log in with their email (for example `rhea.sengupta@seed.settle.test`) and the password `DevPassword123`.
+
+Never edit a migration that has been applied; add a new numbered file instead.

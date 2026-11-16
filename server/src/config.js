@@ -20,4 +20,5 @@ export const config = {
   databaseUrl: required('DATABASE_URL'),
   jwtAccessSecret,
   cookieSecure: process.env.COOKIE_SECURE === 'true',
+    logLevel: process.env.LOG_LEVEL || 'info',
 };

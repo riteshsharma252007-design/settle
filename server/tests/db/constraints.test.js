@@ -70,4 +70,23 @@ describe('database safety nets', () => {
     // Control: the very same update succeeds once a photo is present.
     await pool.query(COMPLETE_PROFILE_SQL, [id, 'https://example.com/photo.jpg']);
   });
+    it('allows a profile with no name yet, but never a complete one', async () => {
+    const user = await pool.query(
+      `INSERT INTO users (email, password_hash)
+       VALUES ('test@example.com', 'not-a-real-hash') RETURNING id`,
+    );
+    const id = user.rows[0].id;
+
+    // Registration creates a profile before the person has typed their name.
+    await pool.query('INSERT INTO profiles (user_id) VALUES ($1)', [id]);
+
+    // Everything else is filled in and a photo exists, but there is still no name.
+    await expect(
+      pool.query(COMPLETE_PROFILE_SQL, [id, 'https://example.com/photo.jpg']),
+    ).rejects.toThrow(/profile_complete_requires_fields/);
+
+    // Control: once the name is saved, completing the profile works.
+    await pool.query('UPDATE profiles SET full_name = $2 WHERE user_id = $1', [id, 'Test Person']);
+    await pool.query(COMPLETE_PROFILE_SQL, [id, 'https://example.com/photo.jpg']);
+  });
 });
